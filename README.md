@@ -1,1 +1,6 @@
-# s5_sae_ia
+# s5 SAE IA
+
+- HEUERTZ Zacharie
+- KORBAN Ryan
+- SCHEFFER Benjamin
+- RAY Marcelin
