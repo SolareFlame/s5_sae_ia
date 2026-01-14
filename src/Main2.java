@@ -1,3 +1,6 @@
+import neuronal_network.TangenteHyperbolique;
+import neuronal_network.TransferFunction;
+
 public class Main2 {
     public static void main(String[] args) {
         TransferFunction func = new TangenteHyperbolique();

@@ -1,3 +1,5 @@
+package neuronal_network;
+
 public class Sigmoide implements TransferFunction {
     @Override
     public double evaluate(double value) {

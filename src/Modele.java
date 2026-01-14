@@ -1,3 +1,6 @@
+import neuronal_network.MLP;
+import neuronal_network.TransferFunction;
+
 public class Modele {
     private MLP mlp;
     private double[][] inputData;
@@ -8,6 +11,7 @@ public class Modele {
 
         this.loadData(dataPath);
     }
+
 
     public void train(int epochs, boolean verbose) {
         for (int i = 0; i < epochs; i++) {

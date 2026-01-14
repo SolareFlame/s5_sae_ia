@@ -1,8 +1,11 @@
+import neuronal_network.Sigmoide;
+import neuronal_network.TangenteHyperbolique;
+
 public class MainTestFonctionActivation {
     public static void main(String[] args) {
         var sigmoide = new Sigmoide();
         System.out.println("###################################################");
-        System.out.println("                Test Sigmoide");
+        System.out.println("                Test neuronal_network.Sigmoide");
         System.out.println("---------------------------------------------------");
         System.out.println("Entree      Evaluate             EvaluateDer");
         System.out.println("-1.0   |    "+sigmoide.evaluate(-1.0)+" | "+ sigmoide.evaluateDer(sigmoide.evaluate(-1.0)));

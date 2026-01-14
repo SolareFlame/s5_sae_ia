@@ -1,5 +1,7 @@
-class Layer {
-    public Neuron Neurons[];
+package neuronal_network;
+
+public class Layer {
+    public Neuron[] Neurons;
     public int 	  Length;
 
     /**

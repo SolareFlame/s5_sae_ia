@@ -1,4 +1,6 @@
-interface TransferFunction  {
+package neuronal_network;
+
+public interface TransferFunction  {
     /**
      * Function de transfert
      * @param value entrée

@@ -1,4 +1,6 @@
-class Neuron {
+package neuronal_network;
+
+public class Neuron {
     public double    Value;
     public double[]  Weights;
     public double    Bias;

@@ -1,7 +1,9 @@
+package neuronal_network;
+
 public class MLP  {
     protected double	        fLearningRate = 0.6;
     protected Layer[]		fLayers;
-    protected TransferFunction 	fTransferFunction;
+    protected TransferFunction fTransferFunction;
 
 
     /**

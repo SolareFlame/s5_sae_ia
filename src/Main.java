@@ -1,3 +1,7 @@
+import neuronal_network.MLP;
+import neuronal_network.TangenteHyperbolique;
+import neuronal_network.TransferFunction;
+
 import java.util.Arrays;
 
 public class Main {
