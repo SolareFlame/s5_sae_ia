@@ -6,7 +6,6 @@ public class TangenteHyperbolique implements TransferFunction {
 
     @Override
     public double evaluateDer(double value) {
-        double tanh = evaluate(value);
-        return 1.0 - Math.pow(tanh, 2);
+        return 1.0 - (value * value);
     }
 }
