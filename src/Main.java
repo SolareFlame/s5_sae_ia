@@ -5,6 +5,7 @@ import neuronal_network.TransferFunction;
 import java.util.Arrays;
 
 public class Main {
+    //TODO LEGACY A SUP
     public static void main(String[] args) {
         int[] layers = {2, 4, 4, 1};
         double learningRate = 0.1;

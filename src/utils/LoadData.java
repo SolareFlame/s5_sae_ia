@@ -1,3 +1,5 @@
+package utils;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -6,34 +8,38 @@ import java.util.List;
 
 public class LoadData {
 
-    public double[][][] loadData(String nomFichier) {
-        List<double[]> inputs = new ArrayList<>();
-        List<double[]> outputs = new ArrayList<>();
+    public static List<DonneeApprentissage> load(String nomFichier) {
+        List<DonneeApprentissage> dataset = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(nomFichier))) {
             String ligne;
             while ((ligne = br.readLine()) != null) {
+                if (ligne.trim().isEmpty()) continue;
+
                 String[] parties = ligne.split(":");
                 if (parties.length == 2) {
-                    inputs.add(parseDoubles(parties[0].trim()));
-                    outputs.add(parseDoubles(parties[1].trim()));
+                    double[] entree = parseDoubles(parties[0].trim());
+                    double[] sortie = parseDoubles(parties[1].trim());
+
+                    dataset.add(new DonneeApprentissage(entree, sortie));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        double[][] inputArray = inputs.toArray(new double[0][]);
-        double[][] outputArray = outputs.toArray(new double[0][]);
-
-        return new double[][][]{inputArray, outputArray};
+        return dataset;
     }
 
-    private double[] parseDoubles(String s) {
+    private static double[] parseDoubles(String s) {
         String[] valeurs = s.split("\\s+");
         double[] result = new double[valeurs.length];
         for (int i = 0; i < valeurs.length; i++) {
-            result[i] = Double.parseDouble(valeurs[i]);
+            try {
+                result[i] = Double.parseDouble(valeurs[i]);
+            } catch (NumberFormatException e) {
+                result[i] = 0.0;
+            }
         }
         return result;
     }

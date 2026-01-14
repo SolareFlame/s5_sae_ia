@@ -34,7 +34,7 @@ public class Main {
         MLP modele = new MLP(couches, learningRate, fonctionActivation);
 
         EntraineurMLP entraineur = new EntraineurMLP(modele);
-        entraineur.entrainer(dataset, nbEpoques);
+        entraineur.train(dataset, nbEpoques);
 
         evaluer(modele, imagettes);
 

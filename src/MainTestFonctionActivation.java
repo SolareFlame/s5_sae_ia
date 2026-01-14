@@ -2,6 +2,7 @@ import neuronal_network.Sigmoide;
 import neuronal_network.TangenteHyperbolique;
 
 public class MainTestFonctionActivation {
+    //TODO LEGACY A SUP
     public static void main(String[] args) {
         var sigmoide = new Sigmoide();
         System.out.println("###################################################");

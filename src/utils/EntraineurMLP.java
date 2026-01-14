@@ -10,8 +10,7 @@ public class EntraineurMLP {
         this.mlp = mlp;
     }
 
-
-    public void entrainer(List<DonneeApprentissage> donnees, int nbEpoques) {
+    public void train(List<DonneeApprentissage> donnees, int nbEpoques) {
 
         for (int passage = 0; passage < nbEpoques; passage++) {
             double erreurCumulee = 0;
@@ -21,7 +20,11 @@ public class EntraineurMLP {
             }
 
             double erreurMoyenne = erreurCumulee / donnees.size();
-            System.out.println("Passage " + (passage + 1) + "/" + nbEpoques + " - Erreur moyenne : " + erreurMoyenne);
+
+            // modifier ici si vous voulez changer le taux d'affichage
+            if (nbEpoques < 20 || passage % 10000 == 0) {
+                System.out.println("Passage " + (passage + 1) + " - Erreur moyenne : " + erreurMoyenne);
+            }
 
         }
     }
