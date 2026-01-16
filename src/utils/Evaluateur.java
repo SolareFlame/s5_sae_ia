@@ -21,23 +21,14 @@ public class Evaluateur {
         }
     }
 
-    public static Resultat evaluate(MLP mlp, List<DonneeApprentissage> donnees, double precision) {
+    public static Resultat evaluate(MLP mlp, List<DonneeApprentissage> donnees, EvaluationStrategy strategie) {
         Resultat res = new Resultat();
         res.total = donnees.size();
 
         for (DonneeApprentissage donnee : donnees) {
             double[] sortieCalculee = mlp.execute(donnee.entree());
-            double[] sortieAttendue = donnee.sortieAttendue();
-
-            boolean estCorrect = true;
-            for (int i = 0; i < sortieCalculee.length; i++) {
-                if (Math.abs(sortieCalculee[i] - sortieAttendue[i]) > precision) {
-                    estCorrect = false;
-                    break;
-                }
-            }
-
-            if (estCorrect) {
+            
+            if (strategie.estCorrect(sortieCalculee, donnee.sortieAttendue())) {
                 res.correct++;
             } else {
                 res.incorrect++;

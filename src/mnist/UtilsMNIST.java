@@ -14,7 +14,7 @@ public class UtilsMNIST {
     public static List<DonneeApprentissage> convertirDonnees(Imagette[] imagettes, int tailleSortie) {
         List<DonneeApprentissage> liste = new ArrayList<>();
         for (Imagette img : imagettes) {
-            liste.add(new DonneeApprentissage(imagetteVersEntree(img), labelVersObjectif(img.getLabel(), tailleSortie)
+            liste.add(new DonneeApprentissage(imagetteVersEntree(img), labelToTab(img.getLabel(), tailleSortie)
             ));
         }
         return liste;
@@ -36,10 +36,10 @@ public class UtilsMNIST {
     }
 
     /**
-     * Transforme le label en vecteur (ex pour le chiffre 3 on aura [0,0,0,1,0,...])
+     * Transforme le label en tableau (ex pour le chiffre 3 on aura [0,0,0,1,0,0,0,0,0,0])
      * ça va nous permettre de faciliter l'identification de la sortie attendue
      */
-    public static double[] labelVersObjectif(int label, int taille) {
+    public static double[] labelToTab(int label, int taille) {
         double[] cible = new double[taille];
         for (int i = 0; i < taille; i++) {
             cible[i] = (i == label) ? 1.0 : 0.0;
@@ -50,7 +50,7 @@ public class UtilsMNIST {
     /**
      * Retourne l'index de la valeur max
      */
-    public static int predire(double[] sortie) {
+    public static int tabToLabel(double[] sortie) {
         int prediction = 0;
         for (int i = 1; i < sortie.length; i++) {
             if (sortie[i] > sortie[prediction]) {

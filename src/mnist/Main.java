@@ -7,6 +7,8 @@ import loader.Imagette;
 import neuronal_network.MLP;
 import neuronal_network.Sigmoide;
 import neuronal_network.TransferFunction;
+import utils.Evaluateur;
+import utils.StrategieClassification;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,23 +38,10 @@ public class Main {
         EntraineurMLP entraineur = new EntraineurMLP(modele);
         entraineur.train(dataset, nbEpoques);
 
-        evaluer(modele, imagettes);
+
+        Evaluateur.Resultat res = Evaluateur.evaluate(modele,dataset,new StrategieClassification());
+        System.out.println(res);
 
     }
 
-    private static void evaluer(MLP mlp, Imagette[] imagettes) {
-        int correct = 0;
-        for (Imagette img : imagettes) {
-            double[] entree = UtilsMNIST.imagetteVersEntree(img);
-            double[] sortie = mlp.execute(entree);
-
-            int prediction = UtilsMNIST.predire(sortie);
-
-            if (prediction == img.getLabel()) {
-                correct++;
-            }
-        }
-        double taux = (double) correct / imagettes.length * 100;
-        System.out.println("Précision : " + correct + "/" + imagettes.length + " (" + taux + "%)");
-    }
 }

@@ -1,9 +1,6 @@
 import neuronal_network.MLP;
 import neuronal_network.Sigmoide;
-import utils.DonneeApprentissage;
-import utils.EntraineurMLP;
-import utils.Evaluateur;
-import utils.LoadData;
+import utils.*;
 
 import java.util.List;
 
@@ -47,7 +44,7 @@ public class MainLogique {
         EntraineurMLP entraineur = new EntraineurMLP(mlp);
         entraineur.train(donnees, 50000);
 
-        Evaluateur.Resultat resultat = Evaluateur.evaluate(mlp, donnees, 0.1);
+        Evaluateur.Resultat resultat = Evaluateur.evaluate(mlp, donnees, new StrategieSeuil(0.1));
         System.out.println(resultat);
     }
 }
