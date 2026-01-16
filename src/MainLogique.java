@@ -23,8 +23,8 @@ public class MainLogique {
     }
 
     private static void testerFichier(String cheminFichier) {
-        System.out.println("\n==========================================");
-        System.out.println("TRAITEMENT DU FICHIER : " + cheminFichier);
+        System.out.println("\n=======================================================================================");
+        System.out.println("Fichier : " + cheminFichier);
 
         List<DonneeApprentissage> donnees = LoadData.load(cheminFichier);
 
@@ -36,7 +36,7 @@ public class MainLogique {
         int tailleEntree = donnees.getFirst().entree().length;
         int tailleSortie = donnees.getFirst().sortieAttendue().length;
 
-        System.out.println(tailleEntree + " entrées --> ... --> " + tailleSortie + " sorties");
+        System.out.println(tailleEntree + " entrées et " + tailleSortie + " sorties");
 
         int[] couches = {tailleEntree, 3, tailleSortie};
         MLP mlp = new MLP(couches, 0.5, new Sigmoide());
