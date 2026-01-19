@@ -1,3 +1,4 @@
+package app;
 import neuronal_network.Sigmoide;
 import neuronal_network.TangenteHyperbolique;
 

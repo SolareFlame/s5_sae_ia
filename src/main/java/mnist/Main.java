@@ -18,7 +18,7 @@ public class Main {
     private static final String FICHIER_IMAGES = "Ensemble des fichiers MNIST-20251007/train-images-idx3-ubyte/train-images.idx3-ubyte";
     private static final String FICHIER_LABELS = "Ensemble des fichiers MNIST-20251007/train-labels-idx1-ubyte/train-labels.idx1-ubyte";
 
-    static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         int nbImages = 1000;
         int nbEpoques = 10;
         double learningRate = 0.1;
