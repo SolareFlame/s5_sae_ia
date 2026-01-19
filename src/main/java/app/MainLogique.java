@@ -1,3 +1,5 @@
+package app;
+
 import neuronal_network.MLP;
 import neuronal_network.Sigmoide;
 import utils.*;

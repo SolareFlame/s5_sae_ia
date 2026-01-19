@@ -1,3 +1,5 @@
+package app;
+
 import neuronal_network.MLP;
 import neuronal_network.TransferFunction;
 import utils.DonneeApprentissage;

@@ -1,3 +1,5 @@
+package app;
+
 import neuronal_network.TangenteHyperbolique;
 import neuronal_network.TransferFunction;
 
