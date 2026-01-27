@@ -1,4 +1,4 @@
-import neuronal_network.Sigmoide;
+import mlp.Sigmoide;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -20,10 +20,10 @@ public class Imagette {
     int[][] tab;
 
     /**
-    private int lignes;
+     * private int lignes;
      * taille imagette
      */
-    private int colonnes,lignes;
+    private int colonnes, lignes;
 
     /**
      * etiquette de l'imagette
@@ -63,6 +63,7 @@ public class Imagette {
 
     /**
      * recupere une valeur de l'imagette
+     *
      * @param l ligne
      * @param c colonne
      * @return couleur du pixel
@@ -73,6 +74,7 @@ public class Imagette {
 
     /**
      * recupere etiquette de l'imagette
+     *
      * @return
      */
     public int getLabel() {

@@ -1,4 +1,4 @@
-package neuronal_network;
+package mlp;
 
 public class TangenteHyperbolique implements TransferFunction {
     @Override

@@ -1,52 +1,49 @@
 package app;
 
-import neuronal_network.MLP;
-import neuronal_network.Sigmoide;
+import data.RangeConversion;
+import data.Dataset;
+import data.loaders.LogicGateDataset;
+import mlp.MLP;
+import mlp.Sigmoide;
+import mlp.TangenteHyperbolique;
+import mlp.TransferFunction;
 import utils.*;
-
-import java.util.List;
+import utils.evaluation.ThresholdStrategy;
 
 public class MainLogique {
-
     public static void main(String[] args) {
 
-        String[] fichiers = {
-                "Data/AND_1_sortie",
-                "Data/AND_2_sortie",
-                "Data/OR_1_sortie",
-                "Data/OR_2_sortie",
-                "Data/XOR_1_sortie",
-                "Data/XOR_2_sortie"
+        boolean useTanh = true;
+        String gatename = "AND";
+
+        int outputSize = 1;
+
+        TransferFunction func = useTanh ? new TangenteHyperbolique() : new Sigmoide();
+        RangeConversion range = useTanh ? RangeConversion.MINUS_ONE_ONE : RangeConversion.ZERO_ONE;
+        double learningRate = useTanh ? 0.05 : 0.2;
+
+
+        double[][] inputs = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
+        double[] tableVerite = switch (gatename) {
+            case "AND" -> new double[]{0, 0, 0, 1};
+            case "OR" -> new double[]{0, 1, 1, 1};
+            case "XOR" -> new double[]{0, 1, 1, 0};
+            case "NAND" -> new double[]{1, 1, 1, 0};
+            default -> throw new IllegalArgumentException("Porte inconnue");
         };
 
-        for (String fichier : fichiers) {
-            testerFichier(fichier);
-        }
-    }
+        Dataset dataset = new LogicGateDataset(gatename, inputs, tableVerite, range, outputSize);
 
-    private static void testerFichier(String cheminFichier) {
-        System.out.println("\n=======================================================================================");
-        System.out.println("Fichier : " + cheminFichier);
+        int[] layers = {2, 4, outputSize};
+        MLP mlp = new MLP(layers, learningRate, func);
 
-        List<DonneeApprentissage> donnees = LoadData.load(cheminFichier);
+        System.out.println("Entrainement sur " + gatename + " avec " + func.getClass().getSimpleName());
+        System.out.println("Range: " + range + " | Sorties: " + outputSize);
 
-        if (donnees.isEmpty()) {
-            System.out.println("Aucune donnée trouvée ou fichier vide.");
-            return;
-        }
+        MlpTrainer trainer = new MlpTrainer(mlp, dataset, 10000);
+        trainer.train();
 
-        int tailleEntree = donnees.getFirst().entree().length;
-        int tailleSortie = donnees.getFirst().sortieAttendue().length;
-
-        System.out.println(tailleEntree + " entrées et " + tailleSortie + " sorties");
-
-        int[] couches = {tailleEntree, 3, tailleSortie};
-        MLP mlp = new MLP(couches, 0.5, new Sigmoide());
-
-        EntraineurMLP entraineur = new EntraineurMLP(mlp);
-        entraineur.train(donnees, 50000);
-
-        Evaluateur.Resultat resultat = Evaluateur.evaluate(mlp, donnees, new StrategieSeuil(0.1));
-        System.out.println(resultat);
+        Evaluator evaluator = new Evaluator(new ThresholdStrategy(0.1));
+        evaluator.evaluate(mlp, dataset);
     }
 }

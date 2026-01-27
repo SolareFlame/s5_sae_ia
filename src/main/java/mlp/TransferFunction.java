@@ -1,8 +1,9 @@
-package neuronal_network;
+package mlp;
 
-public interface TransferFunction  {
+public interface TransferFunction {
     /**
      * Function de transfert
+     *
      * @param value entrée
      * @return sortie de la fonction sur l'entrée
      */
@@ -10,6 +11,7 @@ public interface TransferFunction  {
 
     /**
      * Dérivée de la fonction de tranfert
+     *
      * @param value entrée
      * @return sortie de la fonction dérivée sur l'entrée
      */

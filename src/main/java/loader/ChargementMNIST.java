@@ -8,9 +8,10 @@ public class ChargementMNIST {
 
     /**
      * donne les noms de fichier, retourne un tableau d'imagettes
+     *
      * @param imageFile nom du fichier avec imagettes
      * @param labelFile nom du fichier avec les labels
-     * @param max nombre de valeurs maximales a charger
+     * @param max       nombre de valeurs maximales a charger
      * @return tableau des imagettes avec leurs labels
      * @throws IOException probleme de lecture
      */
@@ -54,7 +55,7 @@ public class ChargementMNIST {
         // lecture des imagettes
 
         // gere max d'images à charger (si max demandé est plus petit que nombre d'images)
-        if ((max > 0)&&(max < nbImage)){
+        if ((max > 0) && (max < nbImage)) {
             nbImage = max;
         }
 
@@ -62,19 +63,19 @@ public class ChargementMNIST {
         Imagette[] imagettes = new Imagette[nbImage];
 
         // pour chaque imagette
-        for (int i =0; i<nbImage; i++){
+        for (int i = 0; i < nbImage; i++) {
 
             // lecture du label avec readUnsignedByte
             int label = dLabel.readUnsignedByte();
             // creation imagette
-            Imagette imagette = new Imagette(lignes,cols,label);
+            Imagette imagette = new Imagette(lignes, cols, label);
 
 
             // construction imagette pixel par pixel (avec readUnsignedByte)
-            for (int l = 0 ; l<lignes ; l ++){
-                for (int c = 0; c<cols ; c++){
+            for (int l = 0; l < lignes; l++) {
+                for (int c = 0; c < cols; c++) {
                     int val = di.readUnsignedByte();
-                    imagette.modifierValeur(l,c,val);
+                    imagette.modifierValeur(l, c, val);
 
                 }
             }

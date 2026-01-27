@@ -1,4 +1,4 @@
-package neuronal_network;
+package mlp;
 
 public class Sigmoide implements TransferFunction {
     @Override
