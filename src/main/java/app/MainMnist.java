@@ -14,25 +14,26 @@ import java.io.IOException;
 
 public class MainMnist {
 
-    public static final String trainImg = "src/main/resources/Ensemble des fichiers MNIST-20251007/train-images-idx3-ubyte/train-images.idx3-ubyte";
-    public static final String trainLbl = "src/main/resources/Ensemble des fichiers MNIST-20251007/train-labels-idx1-ubyte/train-labels.idx1-ubyte";
-    public static final String testImg = "src/main/resources/Ensemble des fichiers MNIST-20251007/t10k-images-idx3-ubyte/t10k-images.idx3-ubyte";
-    public static final String testLbl = "src/main/resources/Ensemble des fichiers MNIST-20251007/t10k-labels-idx1-ubyte/t10k-labels.idx1-ubyte";
-
     public static void main(String[] args) throws IOException {
-        boolean useTanh = true; // pour facilement passer de tanh a singoide pour les tests on va netoyer ça plus tard
+        boolean useFashion = true;
+        String trainImg = useFashion ? "src/main/ressources/EnsembleFashionMnist/train-images-idx3-ubyte" : "src/main/ressources/Ensemble des fichiers MNIST-20251007/train-images-idx3-ubyte/train-images.idx3-ubyte";
+        String trainLbl = useFashion ? "src/main/ressources/EnsembleFashionMnist/train-labels-idx1-ubyte" : "src/main/ressources/Ensemble des fichiers MNIST-20251007/train-labels-idx1-ubyte/train-labels.idx1-ubyte";
+        String testImg = useFashion ? "src/main/ressources/EnsembleFashionMnist/t10k-images-idx3-ubyte" : "src/main/ressources/Ensemble des fichiers MNIST-20251007/t10k-images-idx3-ubyte/t10k-images.idx3-ubyte";
+        String testLbl = useFashion ? "src/main/ressources/EnsembleFashionMnist/t10k-labels-idx1-ubyte" : "src/main/ressources/Ensemble des fichiers MNIST-20251007/t10k-labels-idx1-ubyte/t10k-labels.idx1-ubyte";
+
+        boolean useTanh = false; // pour facilement passer de tanh a sigmoide pour les tests on va nettoyer ça plus tard
         TransferFunction myFunc = useTanh ? new TangenteHyperbolique() : new Sigmoide();
         RangeConversion myRange = useTanh ? RangeConversion.MINUS_ONE_ONE : RangeConversion.ZERO_ONE;
 
-        double learningRate = 0.01;
+        double learningRate = useTanh ? 0.01 : 0.1; //mettre 0.1 sur mnist sigmoide et 0.01 sur tanh
 
         System.out.println("Mode: " + (useTanh ? "Tanh (-1,1)" : "Sigmoide (0,1)"));
         System.out.println("Learning Rate: " + learningRate);
 
 
-        MnistDataset data = new MnistDataset(trainImg, trainLbl, testImg, testLbl, 2000, 1000, myRange);
+        MnistDataset data = new MnistDataset(trainImg, trainLbl, testImg, testLbl, 20000, 1000, myRange);
 
-        int[] layers = {784, 128, 10};
+        int[] layers = {784, 512, 256, 10};
         MLP mlp = new MLP(layers, learningRate, myFunc);
 
         MlpTrainer trainer = new MlpTrainer(mlp, data, 20);
