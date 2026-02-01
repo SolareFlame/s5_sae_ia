@@ -154,7 +154,6 @@ public class MainMnist {
 
                             System.out.printf("[%d/%d] En cours : %s (LR: %.2f)\n", current, total, filename, lr);
 
-                            // Appel du moteur d'exécution existant
                             lancer(useFashion, conf.func, conf.range, hidden, lr, epochs, nbImages, shuffle, filename);
                         }
                     }
@@ -165,14 +164,10 @@ public class MainMnist {
     }
 
 
-    // ==================================================================================
-    // MOTEUR D'EXECUTION
-    // ==================================================================================
     public static void lancer(boolean useFashion, TransferFunction func, RangeConversion range,
                               int[] hiddenLayers, double lr, int epochs, int trainSize,
                               boolean shuffle, String logPath) throws IOException {
 
-        // 1. Choix des chemins
         String tImg = useFashion ? F_TRAIN_IMG : M_TRAIN_IMG;
         String tLbl = useFashion ? F_TRAIN_LBL : M_TRAIN_LBL;
         String testImg = useFashion ? F_TEST_IMG : M_TEST_IMG;
